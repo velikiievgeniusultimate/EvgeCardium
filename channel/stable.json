@@ -1,0 +1,7 @@
+{
+  "version": 1,
+  "name": "First Signal",
+  "url": "https://github.com/velikiievgeniusultimate/EvgeCardium/releases/download/game-v1/game-v1.zip",
+  "sha256": "e5503ec1f401e8c19d96d9046b902bb985d073963c25d48c8fafb0c051f33952",
+  "entry": "index.html"
+}
