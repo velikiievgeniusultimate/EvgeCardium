@@ -46,15 +46,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Package downloadable game
-        run: bash tools/package-update.sh 4 > game-v4.sha256
+        run: bash tools/package-update.sh 5 > game-v5.sha256
       - name: Verify package
-        run: unzip -t dist/game-v4.zip
+        run: unzip -t dist/game-v5.zip
       - uses: actions/upload-artifact@v4
         with:
-          name: EvgeCardium-game-v4
+          name: EvgeCardium-game-v5
           path: |
-            dist/game-v4.zip
-            game-v4.sha256
+            dist/game-v5.zip
+            game-v5.sha256
 
   prototype-release:
     needs: [android, game-package]
@@ -66,7 +66,7 @@ jobs:
           path: android-artifacts
       - uses: actions/download-artifact@v4
         with:
-          name: EvgeCardium-game-v4
+          name: EvgeCardium-game-v5
           path: game-artifacts
       - name: Publish convenient prototype download
         uses: softprops/action-gh-release@v2
@@ -80,17 +80,17 @@ jobs:
             Install `EvgeCardium-dev-0.3.0.apk`. Future game content updates are installed with the button at the top.
           files: |
             android-artifacts/EvgeCardium-dev-0.3.0.apk
-            game-artifacts/dist/game-v4.zip
-            game-artifacts/game-v4.sha256
+            game-artifacts/dist/game-v5.zip
+            game-artifacts/game-v5.sha256
 
-      - name: Publish content update v4
+      - name: Publish content update v5
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: game-v4
-          name: EvgeCardium content v4
+          tag_name: game-v5
+          name: EvgeCardium content v5
           prerelease: true
           make_latest: false
-          body: "AI battle, coin flip, strict turns, and table-first layout."
+          body: "Shield generator, hidden AI hand, mirrored heroes, and menu return."
           files: |
-            game-artifacts/dist/game-v4.zip
-            game-artifacts/game-v4.sha256
+            game-artifacts/dist/game-v5.zip
+            game-artifacts/game-v5.sha256
