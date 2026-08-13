@@ -14,9 +14,14 @@ use spells and defeat the enemy heroine.
 
 ## Android build
 
-Open `android/` in Android Studio and build the `app` module. Before publishing,
 The loader is already pointed at the `velikiievgeniusultimate/EvgeCardium`
-repository.
+repository. The project has two distribution flavors:
+
+- `devDebug` builds an installable prototype that accepts game bundles from GitHub.
+- `playRelease` embeds the stable game and disables executable game updates.
+
+Every successful `main` build publishes the development APK to the
+`prototype-0.1.0` prerelease.
 
 The bundled game is always available offline. On launch, the shell asks GitHub
 for a channel manifest. If a newer bundle exists it downloads the ZIP, verifies
