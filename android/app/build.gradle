@@ -1,7 +1,11 @@
 plugins { id 'com.android.application' }
 
 android { namespace 'com.evgenius.evgecardium'; compileSdk 36
-    defaultConfig { applicationId 'com.evgenius.evgecardium'; minSdk 26; targetSdk 36; versionCode 1; versionName '0.1.0' }
+    defaultConfig {
+        applicationId 'com.evgenius.evgecardium'; minSdk 26; targetSdk 36
+        versionCode 3; versionName '0.3.0'
+        buildConfigField 'int', 'BUNDLED_GAME_VERSION', '3'
+    }
     sourceSets { main.assets.srcDirs = ['../../game'] }
     flavorDimensions += 'distribution'
     productFlavors {
