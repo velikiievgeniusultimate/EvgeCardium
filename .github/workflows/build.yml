@@ -46,15 +46,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Package downloadable game
-        run: bash tools/package-update.sh 3 > game-v3.sha256
+        run: bash tools/package-update.sh 4 > game-v4.sha256
       - name: Verify package
-        run: unzip -t dist/game-v3.zip
+        run: unzip -t dist/game-v4.zip
       - uses: actions/upload-artifact@v4
         with:
-          name: EvgeCardium-game-v3
+          name: EvgeCardium-game-v4
           path: |
-            dist/game-v3.zip
-            game-v3.sha256
+            dist/game-v4.zip
+            game-v4.sha256
 
   prototype-release:
     needs: [android, game-package]
@@ -66,7 +66,7 @@ jobs:
           path: android-artifacts
       - uses: actions/download-artifact@v4
         with:
-          name: EvgeCardium-game-v3
+          name: EvgeCardium-game-v4
           path: game-artifacts
       - name: Publish convenient prototype download
         uses: softprops/action-gh-release@v2
@@ -80,17 +80,17 @@ jobs:
             Install `EvgeCardium-dev-0.3.0.apk`. Future game content updates are installed with the button at the top.
           files: |
             android-artifacts/EvgeCardium-dev-0.3.0.apk
-            game-artifacts/dist/game-v3.zip
-            game-artifacts/game-v3.sha256
+            game-artifacts/dist/game-v4.zip
+            game-artifacts/game-v4.sha256
 
-      - name: Publish content update v3
+      - name: Publish content update v4
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: game-v3
-          name: EvgeCardium content v3
+          tag_name: game-v4
+          name: EvgeCardium content v4
           prerelease: true
           make_latest: false
-          body: "Manual updater foundation with diagnostic error codes."
+          body: "AI battle, coin flip, strict turns, and table-first layout."
           files: |
-            game-artifacts/dist/game-v3.zip
-            game-artifacts/game-v3.sha256
+            game-artifacts/dist/game-v4.zip
+            game-artifacts/game-v4.sha256
