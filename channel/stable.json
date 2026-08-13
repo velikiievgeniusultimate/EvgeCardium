@@ -1,7 +1,7 @@
 {
-  "version": 6,
-  "name": "Physical Cards",
-  "url": "https://github.com/velikiievgeniusultimate/EvgeCardium/releases/download/game-v6/game-v6.zip",
-  "sha256Url": "https://github.com/velikiievgeniusultimate/EvgeCardium/releases/download/game-v6/game-v6.sha256",
+  "version": 7,
+  "name": "Drag The Cards",
+  "url": "https://github.com/velikiievgeniusultimate/EvgeCardium/releases/download/game-v7/game-v7.zip",
+  "sha256Url": "https://github.com/velikiievgeniusultimate/EvgeCardium/releases/download/game-v7/game-v7.sha256",
   "entry": "index.html"
 }
