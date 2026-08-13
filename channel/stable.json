@@ -1,7 +1,7 @@
 {
-  "version": 1,
-  "name": "First Signal",
-  "url": "https://github.com/velikiievgeniusultimate/EvgeCardium/releases/download/game-v1/game-v1.zip",
-  "sha256": "e5503ec1f401e8c19d96d9046b902bb985d073963c25d48c8fafb0c051f33952",
+  "version": 2,
+  "name": "Developer Duel",
+  "url": "https://github.com/velikiievgeniusultimate/EvgeCardium/releases/download/game-v2/game-v2.zip",
+  "sha256": "56e8004c75951f315f88692433ddf411ddf00a75a1b99c146b267620616f0e2d",
   "entry": "index.html"
 }
