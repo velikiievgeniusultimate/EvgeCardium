@@ -46,15 +46,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Package downloadable game
-        run: bash tools/package-update.sh 1 > game-v1.sha256
+        run: bash tools/package-update.sh 2 > game-v2.sha256
       - name: Verify package
-        run: unzip -t dist/game-v1.zip
+        run: unzip -t dist/game-v2.zip
       - uses: actions/upload-artifact@v4
         with:
-          name: EvgeCardium-game-v1
+          name: EvgeCardium-game-v2
           path: |
-            dist/game-v1.zip
-            game-v1.sha256
+            dist/game-v2.zip
+            game-v2.sha256
 
   prototype-release:
     needs: [android, game-package]
@@ -66,7 +66,7 @@ jobs:
           path: android-artifacts
       - uses: actions/download-artifact@v4
         with:
-          name: EvgeCardium-game-v1
+          name: EvgeCardium-game-v2
           path: game-artifacts
       - name: Publish convenient prototype download
         uses: softprops/action-gh-release@v2
@@ -80,4 +80,14 @@ jobs:
             Install `EvgeCardium-dev-0.1.0.apk`. The game content can then update from GitHub without reinstalling the APK.
           files: |
             android-artifacts/EvgeCardium-dev-0.1.0.apk
-            game-artifacts/dist/game-v1.zip
+            game-artifacts/dist/game-v2.zip
+
+      - name: Publish content update v2
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: game-v2
+          name: EvgeCardium content v2
+          prerelease: true
+          make_latest: false
+          body: Developer Duel: explicit hero selection and eternal attacks.
+          files: game-artifacts/dist/game-v2.zip
