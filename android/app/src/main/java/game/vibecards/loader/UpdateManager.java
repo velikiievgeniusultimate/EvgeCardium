@@ -1,4 +1,4 @@
-package game.vibecards.loader;
+package com.evgenius.evgecardium;
 
 import android.content.Context;
 import org.json.JSONObject;
