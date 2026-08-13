@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   android:
@@ -17,16 +17,29 @@ jobs:
         with:
           distribution: temurin
           java-version: '17'
+      - uses: android-actions/setup-android@v3
+      - name: Install Android API 36
+        run: sdkmanager 'platforms;android-36' 'build-tools;35.0.0'
       - uses: gradle/actions/setup-gradle@v4
         with:
-          gradle-version: '8.10.2'
-      - name: Build installable debug APK
+          gradle-version: '8.13'
+      - name: Validate game JavaScript
+        run: node --check game/game.js
+      - name: Build installable development APK
         working-directory: android
-        run: gradle :app:assembleDebug --stacktrace
+        run: gradle :app:assembleDevDebug --stacktrace
+      - name: Build future Play bundle
+        working-directory: android
+        run: gradle :app:bundlePlayRelease --stacktrace
+      - name: Name distributable files
+        run: |
+          mkdir -p dist
+          cp android/app/build/outputs/apk/dev/debug/app-dev-debug.apk dist/EvgeCardium-dev-0.1.0.apk
+          cp android/app/build/outputs/bundle/playRelease/app-play-release.aab dist/EvgeCardium-play-0.1.0.aab
       - uses: actions/upload-artifact@v4
         with:
-          name: EvgeCardium-apk
-          path: android/app/build/outputs/apk/debug/app-debug.apk
+          name: EvgeCardium-android
+          path: dist/
 
   game-package:
     runs-on: ubuntu-latest
@@ -34,9 +47,37 @@ jobs:
       - uses: actions/checkout@v4
       - name: Package downloadable game
         run: ./tools/package-update.sh 1 > game-v1.sha256
+      - name: Verify package
+        run: unzip -t dist/game-v1.zip
       - uses: actions/upload-artifact@v4
         with:
           name: EvgeCardium-game-v1
           path: |
             dist/game-v1.zip
             game-v1.sha256
+
+  prototype-release:
+    needs: [android, game-package]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: EvgeCardium-android
+          path: android-artifacts
+      - uses: actions/download-artifact@v4
+        with:
+          name: EvgeCardium-game-v1
+          path: game-artifacts
+      - name: Publish convenient prototype download
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: prototype-0.1.0
+          name: EvgeCardium prototype 0.1.0
+          prerelease: true
+          make_latest: false
+          body: |
+            First disposable technical prototype.
+            Install `EvgeCardium-dev-0.1.0.apk`. The game content can then update from GitHub without reinstalling the APK.
+          files: |
+            android-artifacts/EvgeCardium-dev-0.1.0.apk
+            game-artifacts/game-v1.zip
