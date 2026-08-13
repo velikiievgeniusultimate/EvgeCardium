@@ -46,15 +46,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Package downloadable game
-        run: bash tools/package-update.sh 8 > game-v8.sha256
+        run: bash tools/package-update.sh 9 > game-v9.sha256
       - name: Verify package
-        run: unzip -t dist/game-v8.zip
+        run: unzip -t dist/game-v9.zip
       - uses: actions/upload-artifact@v4
         with:
-          name: EvgeCardium-game-v8
+          name: EvgeCardium-game-v9
           path: |
-            dist/game-v8.zip
-            game-v8.sha256
+            dist/game-v9.zip
+            game-v9.sha256
 
   prototype-release:
     needs: [android, game-package]
@@ -66,7 +66,7 @@ jobs:
           path: android-artifacts
       - uses: actions/download-artifact@v4
         with:
-          name: EvgeCardium-game-v8
+          name: EvgeCardium-game-v9
           path: game-artifacts
       - name: Publish convenient prototype download
         uses: softprops/action-gh-release@v2
@@ -80,17 +80,17 @@ jobs:
             Install `EvgeCardium-dev-0.3.0.apk`. Future game content updates are installed with the button at the top.
           files: |
             android-artifacts/EvgeCardium-dev-0.3.0.apk
-            game-artifacts/dist/game-v8.zip
-            game-artifacts/game-v8.sha256
+            game-artifacts/dist/game-v9.zip
+            game-artifacts/game-v9.sha256
 
-      - name: Publish content update v8
+      - name: Publish content update v9
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: game-v8
-          name: EvgeCardium content v8
+          tag_name: game-v9
+          name: EvgeCardium content v9
           prerelease: true
           make_latest: false
-          body: "Normalize opponent and player card dimensions."
+          body: "Restore the opponent field height in AI battles."
           files: |
-            game-artifacts/dist/game-v8.zip
-            game-artifacts/game-v8.sha256
+            game-artifacts/dist/game-v9.zip
+            game-artifacts/game-v9.sha256
