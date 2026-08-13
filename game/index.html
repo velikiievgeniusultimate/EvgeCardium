@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+  <meta name="theme-color" content="#08060d">
+  <title>EvgeCardium</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main id="app">
+    <section id="start" class="screen start-screen">
+      <div class="start-art"></div>
+      <div class="start-copy">
+        <div class="eyebrow">EVGECARDIUM // PROTOTYPE 001</div>
+        <h1>EVGE<span>CARDIUM</span></h1>
+        <p>Карточная дуэль в обломках цифрового мира.</p>
+        <button id="start-btn" class="primary">НАЧАТЬ ДУЭЛЬ</button>
+      </div>
+    </section>
+
+    <section id="battle" class="screen battle hidden">
+      <header class="enemy hero-panel">
+        <div class="avatar enemy-avatar">N</div>
+        <div class="hero-copy"><b>Нокта</b><small>Архивариус пустоты</small></div>
+        <div class="health"><span>♥</span><b id="enemy-hp">24</b></div>
+      </header>
+      <div class="enemy-hand" id="enemy-hand"></div>
+      <div class="board enemy-board" id="enemy-board"></div>
+
+      <div class="rift"><span id="turn-label">ВАШ ХОД</span></div>
+
+      <div class="board player-board" id="player-board"></div>
+      <div class="player-row">
+        <div class="avatar player-avatar"></div>
+        <div class="health"><span>♥</span><b id="player-hp">24</b></div>
+        <div class="energy"><span id="energy-pips"></span><b id="energy-label">1/1</b></div>
+        <button id="end-turn">ЗАВЕРШИТЬ</button>
+      </div>
+      <div class="hand" id="hand"></div>
+    </section>
+
+    <section id="result" class="modal hidden">
+      <div class="result-card">
+        <div class="eyebrow">СИГНАЛ ЗАВЕРШЁН</div>
+        <h2 id="result-title">ПОБЕДА</h2>
+        <p id="result-copy"></p>
+        <button id="again" class="primary">ЕЩЁ РАЗ</button>
+      </div>
+    </section>
+
+    <div id="toast"></div>
+  </main>
+  <script src="game.js"></script>
+</body>
+</html>
