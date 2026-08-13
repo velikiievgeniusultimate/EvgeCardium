@@ -1,4 +1,4 @@
-package game.vibecards.loader;
+package com.evgenius.evgecardium;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -23,7 +23,9 @@ public final class MainActivity extends Activity {
         s.setAllowUniversalAccessFromFileURLs(false);
         UpdateManager updates = new UpdateManager(this, UPDATE_CHANNEL_URL);
         load(updates.activeEntry());
-        updates.checkAsync(path -> runOnUiThread(() -> load(path)));
+        if (BuildConfig.REMOTE_GAME_UPDATES) {
+            updates.checkAsync(path -> runOnUiThread(() -> load(path)));
+        }
     }
 
     private void load(File entry) { webView.loadUrl("file://" + entry.getAbsolutePath()); }
