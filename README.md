@@ -1,5 +1,7 @@
 # EvgeCardium
 
+[![Build EvgeCardium](https://github.com/velikiievgeniusultimate/EvgeCardium/actions/workflows/build.yml/badge.svg)](https://github.com/velikiievgeniusultimate/EvgeCardium/actions/workflows/build.yml)
+
 An experimental Android card game whose APK is only a permanent loader. The playable game is
 stored as a versioned web bundle and can be updated from GitHub without replacing
 the APK.
