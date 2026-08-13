@@ -1,6 +1,20 @@
 plugins { id 'com.android.application' }
 
-android { namespace 'game.vibecards.loader'; compileSdk 35
-    defaultConfig { applicationId 'game.vibecards.loader'; minSdk 26; targetSdk 35; versionCode 1; versionName '1.0' }
+android { namespace 'com.evgenius.evgecardium'; compileSdk 36
+    defaultConfig { applicationId 'com.evgenius.evgecardium'; minSdk 26; targetSdk 36; versionCode 1; versionName '0.1.0' }
     sourceSets { main.assets.srcDirs = ['../../game'] }
+    flavorDimensions += 'distribution'
+    productFlavors {
+        dev {
+            dimension 'distribution'
+            applicationIdSuffix '.dev'
+            versionNameSuffix '-dev'
+            buildConfigField 'boolean', 'REMOTE_GAME_UPDATES', 'true'
+        }
+        play {
+            dimension 'distribution'
+            buildConfigField 'boolean', 'REMOTE_GAME_UPDATES', 'false'
+        }
+    }
+    buildFeatures { buildConfig = true }
 }
