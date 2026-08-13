@@ -1,0 +1,11 @@
+/* Keep both physical tables equal. The AI has no cards, but its empty hand row
+   remains in the grid as a mirror spacer for the player's real hand. */
+.ai-battle .top {
+  grid-template-rows: 118px 25px minmax(0, 1fr) !important;
+}
+
+.ai-battle .enemy-hand {
+  display: flex !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
