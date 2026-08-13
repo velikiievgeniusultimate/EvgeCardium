@@ -1,7 +1,7 @@
 {
-  "version": 3,
-  "name": "Manual Updater Foundation",
-  "url": "https://github.com/velikiievgeniusultimate/EvgeCardium/releases/download/game-v3/game-v3.zip",
-  "sha256Url": "https://github.com/velikiievgeniusultimate/EvgeCardium/releases/download/game-v3/game-v3.sha256",
+  "version": 4,
+  "name": "First Turn",
+  "url": "https://github.com/velikiievgeniusultimate/EvgeCardium/releases/download/game-v4/game-v4.zip",
+  "sha256Url": "https://github.com/velikiievgeniusultimate/EvgeCardium/releases/download/game-v4/game-v4.sha256",
   "entry": "index.html"
 }
