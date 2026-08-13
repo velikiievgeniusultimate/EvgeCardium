@@ -1,7 +1,7 @@
 {
-  "version": 9,
-  "name": "AI Field Height Hotfix",
-  "url": "https://github.com/velikiievgeniusultimate/EvgeCardium/releases/download/game-v9/game-v9.zip",
-  "sha256Url": "https://github.com/velikiievgeniusultimate/EvgeCardium/releases/download/game-v9/game-v9.sha256",
+  "version": 10,
+  "name": "Symmetric Battle Tables",
+  "url": "https://github.com/velikiievgeniusultimate/EvgeCardium/releases/download/game-v10/game-v10.zip",
+  "sha256Url": "https://github.com/velikiievgeniusultimate/EvgeCardium/releases/download/game-v10/game-v10.sha256",
   "entry": "index.html"
 }
