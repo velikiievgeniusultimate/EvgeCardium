@@ -1,0 +1,12 @@
+.ai-battle .top {
+  grid-template-rows: 0 25px minmax(0, 1fr) !important;
+}
+
+.ai-battle .enemy-hand {
+  display: none !important;
+  min-height: 0 !important;
+}
+
+.ai-battle .top-zone {
+  min-height: 0;
+}
