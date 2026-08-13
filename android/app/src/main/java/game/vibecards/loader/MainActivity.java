@@ -1,33 +1,8 @@
 package com.evgenius.evgecardium;
-
-import android.app.Activity;
-import android.os.Bundle;
-import android.webkit.WebSettings;
-import android.webkit.WebView;
-import java.io.File;
-
-public final class MainActivity extends Activity {
-    private static final String UPDATE_CHANNEL_URL =
-        "https://raw.githubusercontent.com/velikiievgeniusultimate/EvgeCardium/main/channel/stable.json";
-    private WebView webView;
-
-    @Override public void onCreate(Bundle state) {
-        super.onCreate(state);
-        webView = new WebView(this);
-        setContentView(webView);
-        WebSettings s = webView.getSettings();
-        s.setJavaScriptEnabled(true);
-        s.setDomStorageEnabled(true);
-        s.setAllowFileAccess(true);
-        s.setAllowFileAccessFromFileURLs(false);
-        s.setAllowUniversalAccessFromFileURLs(false);
-        UpdateManager updates = new UpdateManager(this, UPDATE_CHANNEL_URL);
-        load(updates.activeEntry());
-        if (BuildConfig.REMOTE_GAME_UPDATES) {
-            updates.checkAsync(path -> runOnUiThread(() -> load(path)));
-        }
-    }
-
-    private void load(File entry) { webView.loadUrl("file://" + entry.getAbsolutePath()); }
-    @Override public void onBackPressed() { if (webView.canGoBack()) webView.goBack(); else super.onBackPressed(); }
+import android.app.Activity;import android.os.Bundle;import android.graphics.Color;import android.view.View;import android.widget.*;import android.webkit.*;import java.io.File;
+public final class MainActivity extends Activity{
+ private static final String CHANNEL="https://raw.githubusercontent.com/velikiievgeniusultimate/EvgeCardium/main/channel/stable.json";private WebView web;private TextView status;private Button button;private UpdateManager updates;
+ @Override public void onCreate(Bundle b){super.onCreate(b);LinearLayout root=new LinearLayout(this);root.setOrientation(LinearLayout.VERTICAL);root.setBackgroundColor(Color.rgb(9,7,13));LinearLayout bar=new LinearLayout(this);bar.setGravity(android.view.Gravity.CENTER_VERTICAL);bar.setPadding(12,6,8,6);bar.setBackgroundColor(Color.rgb(27,18,35));status=new TextView(this);status.setTextColor(Color.WHITE);status.setTextSize(11);status.setText("Контент v"+BuildConfig.BUNDLED_GAME_VERSION+" · обновление вручную");button=new Button(this);button.setText("ПРОВЕРИТЬ");bar.addView(status,new LinearLayout.LayoutParams(0,-2,1));bar.addView(button,new LinearLayout.LayoutParams(-2,-2));web=new WebView(this);root.addView(bar);root.addView(web,new LinearLayout.LayoutParams(-1,0,1));setContentView(root);WebSettings s=web.getSettings();s.setJavaScriptEnabled(true);s.setDomStorageEnabled(true);s.setAllowFileAccess(true);s.setAllowFileAccessFromFileURLs(false);s.setAllowUniversalAccessFromFileURLs(false);updates=new UpdateManager(this,CHANNEL,BuildConfig.BUNDLED_GAME_VERSION);load(updates.activeEntry());button.setVisibility(BuildConfig.REMOTE_GAME_UPDATES?View.VISIBLE:View.GONE);reset("Контент v"+updates.currentVersion()+" · обновление вручную");}
+ private final UpdateManager.Listener listener=new UpdateManager.Listener(){public void progress(String m){runOnUiThread(()->status.setText(m));}public void available(int v,String n){runOnUiThread(()->{status.setText("Доступно v"+v+" · "+n);button.setEnabled(true);button.setText("СКАЧАТЬ");button.setOnClickListener(x->install());});}public void current(int v){runOnUiThread(()->reset("Уже установлена последняя версия v"+v));}public void installed(File f,int v){runOnUiThread(()->{load(f);reset("Установлено обновление v"+v);});}public void error(String c,String d){runOnUiThread(()->reset("ОШИБКА "+c+" · "+d));}};
+ private void check(){busy("ПРОВЕРКА…","Связываюсь с каналом обновлений…");updates.check(listener);}private void install(){busy("ЗАГРУЗКА…","Подготовка загрузки…");updates.installPending();}private void busy(String b,String s){button.setEnabled(false);button.setText(b);status.setText(s);}private void reset(String s){status.setText(s);button.setEnabled(true);button.setText("ПРОВЕРИТЬ");button.setOnClickListener(v->check());}private void load(File f){web.loadUrl("file://"+f.getAbsolutePath());}@Override public void onBackPressed(){if(web.canGoBack())web.goBack();else super.onBackPressed();}
 }
