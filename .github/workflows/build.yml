@@ -34,8 +34,8 @@ jobs:
       - name: Name distributable files
         run: |
           mkdir -p dist
-          cp android/app/build/outputs/apk/dev/debug/app-dev-debug.apk dist/EvgeCardium-dev-0.1.0.apk
-          cp android/app/build/outputs/bundle/playRelease/app-play-release.aab dist/EvgeCardium-play-0.1.0.aab
+          cp android/app/build/outputs/apk/dev/debug/app-dev-debug.apk dist/EvgeCardium-dev-0.3.0.apk
+          cp android/app/build/outputs/bundle/playRelease/app-play-release.aab dist/EvgeCardium-play-0.3.0.aab
       - uses: actions/upload-artifact@v4
         with:
           name: EvgeCardium-android
@@ -46,15 +46,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Package downloadable game
-        run: bash tools/package-update.sh 2 > game-v2.sha256
+        run: bash tools/package-update.sh 3 > game-v3.sha256
       - name: Verify package
-        run: unzip -t dist/game-v2.zip
+        run: unzip -t dist/game-v3.zip
       - uses: actions/upload-artifact@v4
         with:
-          name: EvgeCardium-game-v2
+          name: EvgeCardium-game-v3
           path: |
-            dist/game-v2.zip
-            game-v2.sha256
+            dist/game-v3.zip
+            game-v3.sha256
 
   prototype-release:
     needs: [android, game-package]
@@ -66,28 +66,31 @@ jobs:
           path: android-artifacts
       - uses: actions/download-artifact@v4
         with:
-          name: EvgeCardium-game-v2
+          name: EvgeCardium-game-v3
           path: game-artifacts
       - name: Publish convenient prototype download
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: prototype-0.1.0
-          name: EvgeCardium prototype 0.1.0
+          tag_name: prototype-0.3.0
+          name: EvgeCardium prototype 0.3.0
           prerelease: true
           make_latest: false
           body: |
-            First disposable technical prototype.
-            Install `EvgeCardium-dev-0.1.0.apk`. The game content can then update from GitHub without reinstalling the APK.
+            First foundation with an explicit, diagnostic in-app updater.
+            Install `EvgeCardium-dev-0.3.0.apk`. Future game content updates are installed with the button at the top.
           files: |
-            android-artifacts/EvgeCardium-dev-0.1.0.apk
-            game-artifacts/dist/game-v2.zip
+            android-artifacts/EvgeCardium-dev-0.3.0.apk
+            game-artifacts/dist/game-v3.zip
+            game-artifacts/game-v3.sha256
 
-      - name: Publish content update v2
+      - name: Publish content update v3
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: game-v2
-          name: EvgeCardium content v2
+          tag_name: game-v3
+          name: EvgeCardium content v3
           prerelease: true
           make_latest: false
-          body: "Developer Duel: explicit hero selection and eternal attacks."
-          files: game-artifacts/dist/game-v2.zip
+          body: "Manual updater foundation with diagnostic error codes."
+          files: |
+            game-artifacts/dist/game-v3.zip
+            game-artifacts/game-v3.sha256
