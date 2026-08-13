@@ -89,5 +89,5 @@ jobs:
           name: EvgeCardium content v2
           prerelease: true
           make_latest: false
-          body: Developer Duel: explicit hero selection and eternal attacks.
+          body: "Developer Duel: explicit hero selection and eternal attacks."
           files: game-artifacts/dist/game-v2.zip
