@@ -80,4 +80,4 @@ jobs:
             Install `EvgeCardium-dev-0.1.0.apk`. The game content can then update from GitHub without reinstalling the APK.
           files: |
             android-artifacts/EvgeCardium-dev-0.1.0.apk
-            game-artifacts/game-v1.zip
+            game-artifacts/dist/game-v1.zip
