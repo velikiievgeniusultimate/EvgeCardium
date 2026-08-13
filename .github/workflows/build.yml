@@ -46,15 +46,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Package downloadable game
-        run: bash tools/package-update.sh 6 > game-v6.sha256
+        run: bash tools/package-update.sh 7 > game-v7.sha256
       - name: Verify package
-        run: unzip -t dist/game-v6.zip
+        run: unzip -t dist/game-v7.zip
       - uses: actions/upload-artifact@v4
         with:
-          name: EvgeCardium-game-v6
+          name: EvgeCardium-game-v7
           path: |
-            dist/game-v6.zip
-            game-v6.sha256
+            dist/game-v7.zip
+            game-v7.sha256
 
   prototype-release:
     needs: [android, game-package]
@@ -66,7 +66,7 @@ jobs:
           path: android-artifacts
       - uses: actions/download-artifact@v4
         with:
-          name: EvgeCardium-game-v6
+          name: EvgeCardium-game-v7
           path: game-artifacts
       - name: Publish convenient prototype download
         uses: softprops/action-gh-release@v2
@@ -80,17 +80,17 @@ jobs:
             Install `EvgeCardium-dev-0.3.0.apk`. Future game content updates are installed with the button at the top.
           files: |
             android-artifacts/EvgeCardium-dev-0.3.0.apk
-            game-artifacts/dist/game-v6.zip
-            game-artifacts/game-v6.sha256
+            game-artifacts/dist/game-v7.zip
+            game-artifacts/game-v7.sha256
 
-      - name: Publish content update v6
+      - name: Publish content update v7
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: game-v6
-          name: EvgeCardium content v6
+          tag_name: game-v7
+          name: EvgeCardium content v7
           prerelease: true
           make_latest: false
-          body: "Physical hero cards and player-selected 2x2 placement grid."
+          body: "Drag-and-drop card interactions and true 2x2 placement targets."
           files: |
-            game-artifacts/dist/game-v6.zip
-            game-artifacts/game-v6.sha256
+            game-artifacts/dist/game-v7.zip
+            game-artifacts/game-v7.sha256
