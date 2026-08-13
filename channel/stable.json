@@ -1,7 +1,7 @@
 {
-  "version": 2,
-  "name": "Developer Duel",
-  "url": "https://github.com/velikiievgeniusultimate/EvgeCardium/releases/download/game-v2/game-v2.zip",
-  "sha256": "20e19c3cbb61223c3a4bf85c10402eb0c5184618cf947bb2e060e6a42ff5cfa2",
+  "version": 3,
+  "name": "Manual Updater Foundation",
+  "url": "https://github.com/velikiievgeniusultimate/EvgeCardium/releases/download/game-v3/game-v3.zip",
+  "sha256Url": "https://github.com/velikiievgeniusultimate/EvgeCardium/releases/download/game-v3/game-v3.sha256",
   "entry": "index.html"
 }
